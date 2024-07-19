@@ -9,18 +9,18 @@ name:"electronics",
 img:Img1
   },
 {
-  title:"Fashion trends",
-  name:"womens's clothing",
+  title:"Women's clothing",
+  name:"women's clothing",
   img:Img2
 },
 {
-  title:"Kitchen-Ware",
-  name:"kitchen items",
+  title:"Jewelery",
+  name:"jewelery",
   img:Img3
 },
 {
-  title:"Cosmotics",
-  name:"cosmotics",
+  title:"Men's clothing",
+  name:"men's clothing",
   img:Img4
 }
 ]

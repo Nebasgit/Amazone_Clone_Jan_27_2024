@@ -5,6 +5,7 @@ import classes from "./Header.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsSearch } from "react-icons/bs";
 import LowerHeader from "./LowerHeader";
+import {Link} from "react-router-dom"
 
 function Header() {
   return (
@@ -12,12 +13,12 @@ function Header() {
     <section >
     <div className={classes.header_container}>
         <div className={classes.log_container}>
-          <a href="">
+          <Link href="">
             <img 
               src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
               alt="Amazon Icon"
             />
-          </a>
+          </Link>
           <div className={classes.delivery}>
           <span><RiMapPinLine /></span>
           <div >
@@ -36,27 +37,27 @@ function Header() {
         </div>
 
         <div className={classes.order_container} >
-          <a  href="" className={classes.language}>
+          <Link  href="" className={classes.language}>
             <img src="../../../public/icons8-usa-50.png" alt="flag" />
             <select name="" id="">
               <option value="">EN</option>
             </select>
-          </a>
-          <a href="">
+          </Link>
+          <Link to="/auth">
             <div>
               <p>Sign in </p>
               <span>Account & Lists</span>
             </div>
-          </a>
+          </Link>
 
-          <a href="">
+          <Link to="/Orders">
             <p>Returns </p>
             <span>& Orders</span>
-          </a>
-          <a href="/" className={classes.cart}>
+          </Link>
+          <Link to="/Cart" className={classes.cart}>
           <BiCart size={35} />
             <span >0</span>
-          </a>
+          </Link>
         </div>
      
     </div>
