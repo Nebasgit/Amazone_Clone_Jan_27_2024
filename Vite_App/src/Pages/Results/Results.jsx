@@ -7,22 +7,22 @@ import { productUrl } from '../../API/EndPoints'
 import ProductCard from '../../components/Product/ProductCard'
 
 
+
 function Results() {
   const[results,setResutls]=useState([])
 const {catagoryName}=useParams()
 useEffect(()=>{
   axios.get(`${productUrl}/products/category/${catagoryName}`).then((res)=>{
     setResutls(res.data)
-    console.log(res.data);
-  }).catch((err)=>{console.log(err);})
-},[])
-
+  })
+  .catch((err)=>{console.log(err);})
+},[catagoryName])
 
   return (
     <Layout>
       <section>
         <h1 style={{padding:"30px"}}>Results</h1>
-        <p  style={{padding:"30px"}}>category / {catagoryName}</p>
+        <p  style={{padding:"30px"}}>category/{catagoryName}</p>
         <hr />
         <div className={classes.products_container}>
           {

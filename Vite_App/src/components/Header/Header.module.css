@@ -2,6 +2,7 @@
   padding: 0px;
   margin: 0px;
 }
+
 .header_container{
   background-color: #1a1a1a;
   display: flex;
@@ -10,13 +11,13 @@
   color: white;
   height: 70PX;
 }
-.log_container{
+.logo_container{
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 250px;
 }
-.log_container img{
+.logo_container img{
 width: 80%;
 padding-top: 5px;
 margin-left: 20px;
@@ -107,7 +108,7 @@ vertical-align: middle;
 }
 .order_container a:hover
 ,.delivery :hover,
-.log_container a:hover,
+.logo_container a:hover,
 .lower_container ul li:hover
 {
   border: 1px solid white;

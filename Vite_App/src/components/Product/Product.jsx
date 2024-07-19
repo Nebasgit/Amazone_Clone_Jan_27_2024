@@ -5,6 +5,7 @@ import classes from "./Product.module.css"
 
 function Product() {
   const [products,setProducts]=useState([])
+  const [isLoading,setIsLoading]=useState()
   useEffect(()=>{
    axios.get("https://fakestoreapi.com/products").then((res)=>{
    setProducts(res.data)

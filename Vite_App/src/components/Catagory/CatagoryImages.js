@@ -1,6 +1,6 @@
 import Img1 from "./Image/Electronics.jpg"
 import Img2 from "./Image/Fashion.jpg"
-import Img3 from "./Image/Kitchen.jpg"
+import Img3 from "./Image/JEWLERY.webp"
 import Img4 from "./Image/Cosmotics.jpg"
 export const CatagoryImages=[
   {
