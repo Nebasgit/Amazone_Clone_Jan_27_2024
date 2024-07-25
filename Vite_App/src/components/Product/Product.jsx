@@ -24,7 +24,12 @@ function Product() {
   {
   products.map((elements)=>{
     return(
-      <ProductCard product={elements} key={elements.id}/>
+      <ProductCard 
+      renderAdd={true}
+      product={elements} 
+      key={elements.id}
+
+      />
     )
   })
 }

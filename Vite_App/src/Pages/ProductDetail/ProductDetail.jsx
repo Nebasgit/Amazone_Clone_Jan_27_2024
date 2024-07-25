@@ -25,9 +25,11 @@ axios.get(`${productUrl}/products/${productId}`).then((res)=>{
 
   return (
     <Layout>
-      {isLoading ?(<Loader />) :(<ProductCard product={products} 
+      {isLoading ?(<Loader />) :(<ProductCard 
+      product={products} 
       flex={true}
       rederDesc={true}
+      renderAdd={true}
       />)}
     </Layout>
   )

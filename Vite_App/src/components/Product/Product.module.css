@@ -26,9 +26,9 @@ object-fit: contain;
 .button{
   display: none;
   padding: 5px 10px;
-  font-weight: 700;
+  font-weight: 800;
   border: none;
-  cursor: pointer;
+  cursor:pointer;
   background-color: var(--primary-color);
   width: 100%;
   margin: 10px 0px;

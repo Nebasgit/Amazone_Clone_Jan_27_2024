@@ -8,7 +8,7 @@ function Catagory() {
   return (
     <div className={classes.catagory_container}>
 {
-CatagoryImages.map((elements)=>{
+CatagoryImages.map((elements,i)=>{
   return(
 <CatagoryCard data={elements} />
   

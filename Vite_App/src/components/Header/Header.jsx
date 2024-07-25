@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { RiMapPinLine } from "react-icons/ri";
 import { BiCart } from "react-icons/bi";
 import classes from "./Header.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BsSearch } from "react-icons/bs";
+import {BsSearch} from "react-icons/bs";
 import LowerHeader from "./LowerHeader";
 import {Link} from "react-router-dom"
+import {DataContext} from "../DataProvider/DataProvider";
+import { auth } from "../../Utility/FireBase";
 
 function Header() {
+const [{user,basket},dispatch]=useContext(DataContext)
   return (
-    <>
+    <section className={classes.fixed}>
     <section >
     <div className={classes.header_container}>
         <div className={classes.logo_container}>
-          <Link href="">
+          <Link to="/">
             <img 
               src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
               alt="Amazon Icon"
@@ -43,11 +46,22 @@ function Header() {
               <option value="">EN</option>
             </select>
           </Link>
-          <Link to="/auth">
+          <Link to={!user && "/auth"}>
             <div>
+              {user?(
+                <>
+                <p>Hello {user?.email?.split("@")[0]}</p>
+                  <span onClick={()=>auth.signOut()}>Sign Out</span>
+                  </>
+                 ) :(
+                  <>
               <p>Sign in </p>
               <span>Account & Lists</span>
-            </div>
+              </>
+              )}
+              </div>
+              
+            
           </Link>
 
           <Link to="/Orders">
@@ -56,14 +70,14 @@ function Header() {
           </Link>
           <Link to="/Cart" className={classes.cart}>
           <BiCart size={35} />
-            <span >0</span>
+            <span >{basket.length}</span>
           </Link>
         </div>
      
     </div>
      </section>
      < LowerHeader/>
-    </>
+    </section>
   );
 }
 
