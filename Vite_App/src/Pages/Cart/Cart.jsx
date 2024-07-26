@@ -37,9 +37,9 @@ const decrement =(id)=>{
     {
       basket?.length==0?(<p>Opps ! No item in your cart</p>):(
         basket?.map((item,i)=> {
-          return <section className={classes.cart_product}>
+          return <section  key={i} className={classes.cart_product}>
           <ProductCard
-          key={i}
+         
           product={item}
           rederDesc={true}
           renderAdd={false}

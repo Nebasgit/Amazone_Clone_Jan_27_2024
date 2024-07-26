@@ -10,7 +10,7 @@ function Catagory() {
 {
 CatagoryImages.map((elements,i)=>{
   return(
-<CatagoryCard data={elements} />
+<CatagoryCard data={elements} index={i} />
   
   )
 })

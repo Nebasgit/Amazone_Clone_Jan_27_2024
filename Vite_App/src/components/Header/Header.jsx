@@ -11,6 +11,11 @@ import { auth } from "../../Utility/FireBase";
 
 function Header() {
 const [{user,basket},dispatch]=useContext(DataContext)
+
+const totalItem = basket?.reduce((amount,item)=>{
+  return item.amount + amount
+  },0)
+
   return (
     <section className={classes.fixed}>
     <section >

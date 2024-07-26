@@ -5,6 +5,7 @@ import ComponentB from './ComponentB'
 import {ThemeProvider} from './ContextProvider'
 import { auth } from './Utility/FireBase'
 import { DataContext } from './components/DataProvider/DataProvider'
+import { Type } from './Utility/ActionType'
 
 
 
@@ -15,16 +16,16 @@ function App() {
 auth.onAuthStateChanged((authUser)=>{
 
   if (authUser){
-    console.log(authUser)
+    // console.log(authUser)
       dispatch({
-        type:Type.SET_USER,
+        Type:Type.SET_USER,
         user:authUser
       })
   }
   else{
     dispatch({
       type:Type.SET_USER,
-      user:null
+      user:null,
     })
   }
 })

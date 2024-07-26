@@ -1,6 +1,6 @@
 import React, {useState,useContext} from 'react'
 import classes from "./Auth.module.css"
-import { Link,useNavigate } from 'react-router-dom'
+import { Link,useNavigate,useLocation } from 'react-router-dom'
 import {auth} from "../../Utility/FireBase"
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
 import {DataContext} from "../../components/DataProvider/DataProvider"
@@ -13,28 +13,28 @@ function Auth() {
 const [email,setEmail]= useState("");
 const [password,setPassword]= useState("");
 const [error,setError]=useState("");
-
 const [loading, setLoading]=useState({
   signIn: false,
-  signUp: false
+  signUp: false,
 })
 const [{user},dispatch]=useContext(DataContext);
 const navigate =useNavigate()
-console.log(user);
+const navStateData=useLocation()
+// console.log(user);
   
 const authHandler = async (e)=>{
 e.preventDefault();
-console.log(e.target.name);
-
+// console.log(e.target.name);
 if (e.target.name == "singin"){
   setLoading({...loading, signIn:true})
-  signInWithEmailAndPassword(auth,email,password).then((userInfo)=>{
+  signInWithEmailAndPassword(auth,email,password)
+  .then((userInfo)=>{
     dispatch({
 type: Type.SET_USER,
 user: userInfo.user,
     })
     setLoading({...loading, signIn:false})
-    navigate("/")
+    navigate(navStateData.state.redirect ||"/")
   }).catch((err)=>{
     setError(err.message)
     setLoading({...loading, signIn:false})
@@ -42,12 +42,14 @@ user: userInfo.user,
 
 }else{
   setLoading({...loading, signUp:true})
-createUserWithEmailAndPassword(auth,email,password).then((userInfo)=>{
+createUserWithEmailAndPassword(auth,email,password)
+.then((userInfo)=>{
   dispatch({
     type: Type.SET_USER,
     user: userInfo.user,
         })
         setLoading({...loading, signUp:false})
+        navigate("/")
 }).catch((err)=>{
   setError(err.message)
   setLoading({...loading, signUp:false})
@@ -64,9 +66,22 @@ createUserWithEmailAndPassword(auth,email,password).then((userInfo)=>{
 
 <div className={classes.login_container}>
   <h1>Sign In</h1>
+{
+  navStateData?.state?.msg &&(
+    <small
+    style={{
+      padding:"5px",
+      textAlign:"center",
+      color:"red",
+      fontWeight:"bold"
+    }}>
+      {navStateData?.state?.msg}
+    </small>
+  )
+}
   <form action="">
 <div>
-  <label htmlFor="email">E-mail</label>
+  <label htmlFor="email">Email</label>
 
   <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" id="email" />
   </div>
@@ -81,7 +96,7 @@ createUserWithEmailAndPassword(auth,email,password).then((userInfo)=>{
   type="Submit" 
 className={classes.login_signinButton}>
   {loading.signIn ? (<RingLoader
-  color="orange"
+  color="blue"
   size={20}
 ></RingLoader>) : ("Sign In")}
   </button>
@@ -94,7 +109,7 @@ className={classes.login_signinButton}>
   onClick={authHandler} 
   type="Submit" 
   className={classes.login_register_Button}>
-    {loading.signIn ? (<RingLoader
+    {loading.signUp ? (<RingLoader
   color="orange"
   size={20}
 ></RingLoader>) :("Create your Amazon Account") }
