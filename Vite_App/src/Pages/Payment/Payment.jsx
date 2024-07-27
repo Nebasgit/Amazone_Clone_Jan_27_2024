@@ -9,10 +9,11 @@ import { axiosInstance } from '../../API/axios'
 import {RingLoader} from "react-spinners"
 import  {db}  from '../../Utility/FireBase' 
 import { useNavigate } from 'react-router-dom'
+import {Type} from '../../Utility/ActionType'
 
 function Payment() {
 
-  const [{user,basket}]=useContext(DataContext)
+  const [{user,basket},dispatch]=useContext(DataContext)
   // console.log(user);
 
   const totalItem = basket?.reduce((amount,item)=>{
@@ -30,7 +31,6 @@ function Payment() {
   const navigate=useNavigate();
 
   const handleChange=(e)=>{
-// console.log(e);
 e?.error?.message? setCardError(e?.error?.message):setCardError("")
   }
 
@@ -41,7 +41,7 @@ e?.error?.message? setCardError(e?.error?.message):setCardError("")
       // Step1  contact Backend || function 
 
       const response = await axiosInstance({
-        method:"POST",
+        method:"post",
         url:`/payment/create?total=${total*100}`
       })
 // console.log(response.data);
@@ -57,6 +57,7 @@ const {paymentIntent} = await stripe.confirmCardPayment(
   }
 )
 // console.log(paymentIntent);
+
 // Step 3 After confirmation --> order firestore database save , clear basket
 await db
 .collection("users")
@@ -68,9 +69,11 @@ await db
   amount:paymentIntent.amount,
   created:paymentIntent.created,
 })
+dispatch({type:Type.EMPTY_BASKET})
+
 // console.log(paymentIntent);
 setProcessing(false)
-navigate("/orders",{state:{msg:"You have placed a new order"}})
+navigate("/Orders",{state:{msg:"You have placed a new order"}})
     }catch(error){
       console.log(error);
       setProcessing(false)

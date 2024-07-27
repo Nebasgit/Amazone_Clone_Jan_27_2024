@@ -2,7 +2,7 @@ import React,{useContext,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DataContext } from './DataProvider/DataProvider'
 
-const ProtectRoute =({children,msg,redirect})=> {
+const ProtectedRoute =({children,msg,redirect})=> {
 const navigate=useNavigate()
 const [{user},dispatch]=useContext(DataContext)
 
@@ -13,10 +13,8 @@ if(!user){
 },[])
 
   return (
-    <div>
-
-    </div>
+children
   )
 }
 
-export default ProtectRoute
+export default ProtectedRoute

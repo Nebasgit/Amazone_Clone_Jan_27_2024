@@ -19,8 +19,6 @@ dispatch({
 })
 }
 
-
-
   return (
     <div className={`${classes.card_container} ${flex?classes.product_flexed :""}`}>
       <Link to={`/products/${id}`}>
@@ -42,8 +40,7 @@ dispatch({
         </div>
         {
           renderAdd &&  <button className={classes.button} onClick={addToCart}>add to cart</button>
-        }
-       
+        }      
       </div>
     </div>
   );

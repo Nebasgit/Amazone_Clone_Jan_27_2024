@@ -15,42 +15,44 @@ const [password,setPassword]= useState("");
 const [error,setError]=useState("");
 const [loading, setLoading]=useState({
   signIn: false,
-  signUp: false,
+  signUp: false
 })
 const [{user},dispatch]=useContext(DataContext);
 const navigate =useNavigate()
 const navStateData=useLocation()
-// console.log(user);
+console.log(navStateData);
   
 const authHandler = async (e)=>{
 e.preventDefault();
-// console.log(e.target.name);
-if (e.target.name == "singin"){
+console.log(e.target.name);
+if (e.target.name == "signin"){
   setLoading({...loading, signIn:true})
   signInWithEmailAndPassword(auth,email,password)
   .then((userInfo)=>{
     dispatch({
-type: Type.SET_USER,
-user: userInfo.user,
+      Type: Type.SET_USER,
+      user: userInfo.user,
     })
     setLoading({...loading, signIn:false})
-    navigate(navStateData.state.redirect ||"/")
-  }).catch((err)=>{
+    navigate(navStateData?.state?.redirect || "/")
+  })
+  .catch((err)=>{
     setError(err.message)
-    setLoading({...loading, signIn:false})
+    setLoading({...loading, signIn:false })
   })
 
 }else{
-  setLoading({...loading, signUp:true})
-createUserWithEmailAndPassword(auth,email,password)
+  setLoading({...loading, signUp:true })
+createUserWithEmailAndPassword(auth, email, password)
 .then((userInfo)=>{
   dispatch({
-    type: Type.SET_USER,
+    Type: Type.SET_USER,
     user: userInfo.user,
         })
-        setLoading({...loading, signUp:false})
+        setLoading({...loading, signUp: false})
         navigate("/")
-}).catch((err)=>{
+})
+.catch((err)=>{
   setError(err.message)
   setLoading({...loading, signUp:false})
 })
@@ -91,12 +93,12 @@ createUserWithEmailAndPassword(auth,email,password)
   <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" id="password"/>
 </div>
 <button 
+ type="submit" 
   name="signin"
   onClick={authHandler} 
-  type="Submit" 
 className={classes.login_signinButton}>
   {loading.signIn ? (<RingLoader
-  color="blue"
+  color="#000"
   size={20}
 ></RingLoader>) : ("Sign In")}
   </button>
@@ -104,10 +106,10 @@ className={classes.login_signinButton}>
   <p>
     By singing-in you agreen to the AMAZON FAKE CLONE conditions of use & sale.please see our Privacy Notice, our Cookies Notice and out Interest-Based Ads Notice.
   </p>
-  <button 
+  <button
+  type="submit"  
   name="signup"
   onClick={authHandler} 
-  type="Submit" 
   className={classes.login_register_Button}>
     {loading.signUp ? (<RingLoader
   color="orange"
