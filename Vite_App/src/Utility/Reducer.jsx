@@ -9,7 +9,7 @@ export const Reducer = (state,action)=>{
 switch(action.Type){
   case Type.ADD_TO_BASKET:
     // check if an item exists 
-          const existingItem =state.basket.find((item)=>item?.id === action.item.id)
+          const existingItem =state.basket.find((item)=>item.id === action.item.id)
           if (!existingItem){
             return{
               ...state,
@@ -18,7 +18,7 @@ switch(action.Type){
           } 
           else {
             const updatedBasket = state.basket.map((item)=>{
-              item?.id === action.item.id? {...item,amount:item?.amount+1} :item
+             return item.id === action.item.id? {...item,amount:item.amount + 1} :item
             })
             return{
               ...state,
@@ -26,7 +26,7 @@ switch(action.Type){
             }
           }
           case Type.REMOVE_FROM_BASKET:
-            const index= state.basket.findIndex(item=>item?.id === action.id)
+            const index= state.basket.findIndex(item=>item.id === action.id)
             let newBasket=[...state.basket]
 
             if(index>= 0){
@@ -43,7 +43,7 @@ switch(action.Type){
             case Type.EMPTY_BASKET:
                 return{
                   ...state,
-                  basket:[]
+                  basket:[],
                 }
             case Type.SET_USER:
             return{

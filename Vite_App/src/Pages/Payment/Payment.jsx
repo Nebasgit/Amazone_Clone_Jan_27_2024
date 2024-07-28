@@ -69,7 +69,7 @@ await db
   amount:paymentIntent.amount,
   created:paymentIntent.created,
 })
-dispatch({type:Type.EMPTY_BASKET})
+dispatch({Type:Type.EMPTY_BASKET})
 
 // console.log(paymentIntent);
 setProcessing(false)
