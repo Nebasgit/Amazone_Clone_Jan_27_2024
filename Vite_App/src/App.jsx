@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState }  from 'react'
 import Routing from './Routing'
-import ComponentA from './ComponentA'
-import ComponentB from './ComponentB'
 import {ThemeProvider} from './ContextProvider'
 import { auth } from './Utility/FireBase'
 import { DataContext } from './components/DataProvider/DataProvider'
@@ -24,7 +22,7 @@ auth.onAuthStateChanged((authUser)=>{
   }
   else{
     dispatch({
-      type:Type.SET_USER,
+      Type:Type.SET_USER,
       user:null,
     })
   }
